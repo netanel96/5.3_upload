@@ -124,6 +124,7 @@ namespace wpf_MVVM_EntityFramework
             //pushpin.Background = new SolidColorBrush(Colors.Blue);
             //pushpin.Location = location;
             //pushpinLayer.AddChild(pushpin, location);
+            int x = 0;
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
