@@ -1,0 +1,27 @@
+﻿<Window x:Class="wpf_MVVM_EntityFramework.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_MVVM_EntityFramework"
+        xmlns:WPF="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="504" Width="1084">
+
+    <Grid Margin="10,0,0.333,-0.333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42*" ></RowDefinition>
+            <RowDefinition Height="156*"/>
+            <RowDefinition Height="221*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"  Orientation="Horizontal" VerticalAlignment="Top" Height="35" MinWidth="100" Margin="0,0,-0.333,0">
+            <Button  Style="{StaticResource navigtionBuutens}" Content="Page 1"    Click="Button_Click_1"/>
+            <Button Style="{StaticResource navigtionBuutens}" Content="Page 2"  Click="Button_Click_2"/>
+            <Button Style="{StaticResource navigtionBuutens}" Content="Page 3" Click="Button_Click_3"  />
+            <Button Style="{StaticResource navigtionBuutens}" Content="Page 4" Click="Button_Click_4"  />
+            <Button Style="{StaticResource navigtionBuutens}" Content="Page 5" Click="Button_Click_5" />
+        </StackPanel>
+        <Frame  Grid.Row="1" Style="{StaticResource FrameStyle}" x:Name="Main" Margin="0,0,-0.333,0" Grid.RowSpan="2"/>
+    </Grid>
+
+</Window>

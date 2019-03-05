@@ -1,0 +1,54 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpf_MVVM_EntityFramework.UserControls"
+             xmlns:Wpf="clr-namespace:ThinkGeo.MapSuite.Wpf;assembly=ThinkGeo.MapSuite.Wpf"
+    xmlns:WPF="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" x:Class="wpf_MVVM_EntityFramework.UserControls.DropsMap"
+             
+    mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1400" 
+    xmlns:viewModel="clr-namespace:wpf_MVVM_EntityFramework.ViewModel">
+    <UserControl.Resources>
+        <viewModel:DropsMapVM x:Key="commandViewModel"  />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="400*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <StackPanel Grid.Column="0" Width="auto" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
+            <Label  Style="{StaticResource SpacificLabel}"  Margin="10,10,10,0" Content="street"  />
+            <TextBox x:Name="txt_street"  Margin="10,10,10,0" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" />
+            <Label Style="{StaticResource SpacificLabel2}"  Margin="10,10,10,0" Content="city"    />
+            <TextBox x:Name="txt_city"  Margin="10,10,10,0" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"    Text="" VerticalAlignment="Top" />
+            <Label  Style="{StaticResource SpacificLabel3}"  Margin="10,10,10,0" Content="state"  />
+            <TextBox x:Name="txt_state"  Margin="10,10,10,0" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap"  Text="" VerticalAlignment="Top" />
+            <Label Style="{StaticResource SpacificLabel4}" Margin="10,10,10,0" Content="ZIP CODE"/>
+            <TextBox x:Name="txt_zip"  Margin="10,10,10,0" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap"    Text="" VerticalAlignment="Top"  />
+            <Button Content="Show drops" Width="75"/>
+
+        </StackPanel>
+        <WPF:Map Grid.Column="1" HorizontalAlignment="Left" Margin="396.333,0,0,0" VerticalAlignment="Top" Height="535" Width="575">
+
+            <WPF:Map CredentialsProvider="Ai8F6lHhV6lGmf4Cg5ZI8yvtCmyB9SJLJVfQUdX_Q2DBGWxNahx4G1imNRY1ymrs" x:Name="myMap" />
+
+
+            <WPF:Pushpin  Name="Pushpin1" Content="Pushpin" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="10" Margin="371,0,0,0"/>
+            <WPF:Pushpin  Name="Pushpin2" Content="Pushpin" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="10"/>
+            <WPF:Pushpin  Name="Pushpin3" Content="Pushpin" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="10"/>
+            <WPF:Pushpin  Name="Pushpin4" Content="Pushpin" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="10" Margin="145,45,0,0"/>
+        </WPF:Map>
+        <WebBrowser Grid.Column="1" x:Name="WebBrowserGoogleMap" HorizontalAlignment="Left" Height="auto" Margin="9.333,10,0,65" VerticalAlignment="Stretch" Width="382"/>
+        <!-- <Wpf:WpfMap Name="WpfMap" Grid.Column="1" HorizontalAlignment="Left" Height="350" Margin="35.667,20,0,0" VerticalAlignment="Top" Width="590"/>
+        -->
+        <!--
+         -->
+
+    </Grid>
+</UserControl>

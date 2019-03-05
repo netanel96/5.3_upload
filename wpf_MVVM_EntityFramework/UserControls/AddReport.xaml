@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="wpf_MVVM_EntityFramework.UserControls.AddReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpf_MVVM_EntityFramework.UserControls"
+             mc:Ignorable="d" d:DesignWidth="800" Height="405">
+    <Grid>
+        <!--
+        <Button Content="הוסף פרטי דיווח" HorizontalAlignment="Left" Margin="115,310,0,0" VerticalAlignment="Top" Width="135"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="175,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="175,150,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="175,200,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox  HorizontalAlignment="Left" Height="23" Margin="173,244,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="168,33,0,0" TextWrapping="Wrap" Text="הכנסת נתוני נפילות" VerticalAlignment="Top" Height="26" Width="125"/>
+        <Label Style="{StaticResource SpacificLabel}" Content="שם" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top" Width="98"/>
+        <Label Style="{StaticResource SpacificLabel2}"  Content="כתובת" HorizontalAlignment="Left" Margin="40,150,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.526,0.577"/>
+        <Label Style="{StaticResource SpacificLabel3}" Content="תאריך" HorizontalAlignment="Left" Margin="41,200,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource SpacificLabel4}" Content="מספר בומים" HorizontalAlignment="Left" Margin="40,244,0,0" VerticalAlignment="Top"/>
+        <WrapPanel HorizontalAlignment="Left" Height="396" Margin="0,9,0,0" VerticalAlignment="Top" Width="320">
+            <Ellipse  Fill="#FFF4F4F5" Height="40" Stroke="Black" Width="100"></Ellipse>
+        </WrapPanel>
+        <Image HorizontalAlignment="Left" Height="167" Margin="330,100,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label Content="תמונת הנפילה" FontSize="20" HorizontalAlignment="Left" Margin="335,38,0,0" VerticalAlignment="Top" Height="57"/>
+        <Label Content="שעת נפילה מדוייקת" FontSize="20" HorizontalAlignment="Left" Margin="576,56,0,0" VerticalAlignment="Top" Height="57" RenderTransformOrigin="-0.082,1.351"/>
+        <Label Content="20:30:50" FontSize="50" HorizontalAlignment="Left" Margin="545,208,0,0" VerticalAlignment="Top" Height="104" Width="230"/>
+        -->
+
+    </Grid>
+</UserControl>
