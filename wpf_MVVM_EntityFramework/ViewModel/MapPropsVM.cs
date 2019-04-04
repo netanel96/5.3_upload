@@ -2,39 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using wpf_MVVM_EntityFramework.Commands;
 using wpf_MVVM_EntityFramework.Model;
 
 namespace wpf_MVVM_EntityFramework.ViewModel
 {
-    public class DropsMapVM
+   public class MapPropsVM
     {
         MainModel MainModel { set; get; }
 
         public ObservableCollection<MapPropsModel> MapProps { get; set; }
-
-        public ShowDropsCommand ShowDropsCommand { get; set; }
-        public DropsMapVM()
+        public MapPropsVM()
         {
             MainModel = new MainModel();
-
-            this.ShowDropsCommand = new ShowDropsCommand(this);
             this.MapProps = new ObservableCollection<MapPropsModel>();
             this.MapProps.Add(new MapPropsModel() { Name = "usa ", Latitude = "38.8833N", Longitude = "77.0167W", Color = "Blue" });
+            FillMapWithReports();
 
+        }
 
-
-
-
-
-
-
-            /////////////////////////////
+        //gets list of reports. add it to the db. then get a list of reports from the db. then show it on map.
+        private void FillMapWithReports()
+        {
             //////this is suppose to come from the user. in add report window.
             List<Report> reports = new List<Report>()
         {
@@ -60,7 +51,6 @@ namespace wpf_MVVM_EntityFramework.ViewModel
                 ImagePath = "imagePath",
                 lat = 31.898865,
                 log = 34.810445
-               
                   }
         };
             //////
@@ -73,16 +63,8 @@ namespace wpf_MVVM_EntityFramework.ViewModel
             reportsFromDB.Add(MainModel.BL.GetReportById(24));
             for (int i = 0; i < reportsFromDB.Count; i++)
             {
-                MapProps.Add(new MapPropsModel() { Name = "USA ", Latitude = reportsFromDB[i].lat.ToString(), Longitude = reportsFromDB[i].log.ToString(), Color = "Gray" });
+                MapProps.Add(new MapPropsModel() { Name = "USA ", Latitude = reportsFromDB[i].lat.ToString(), Longitude = reportsFromDB[i].log.ToString(), Color = "Green" });
             }
-            //d
-            Debug.WriteLine(MainModel.BL.GetReportById(24).Report_Adress);
-        }
-        public void ShowDropsOnMap()
-        {
-           Debug.WriteLine("Hello");
-          
         }
     }
 }
-

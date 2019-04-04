@@ -29,47 +29,67 @@ namespace wpf_MVVM_EntityFramework
         public MainWindow()
         {
             #region test
-            this.DataContext = new Entitys();
-            List<Report> r = new List<Report>()
-        {
-                  new Report
-                  {
-                    Id = 10,
-                    Report_Id=23,
-                    Time = new DateTime(2000,10,10),
-                    Name = "Moshe",
-                    Report_Adress = "report_Adress",
-                    Boom_count = 0,
-                    ImagePath = "imagePath",
-                    lat = 32.2323,
-                    log = 23.345324
-                  },
-                  new Report {
-                Id = 11,
-                Report_Id= 123,
-                Time = new DateTime(2019,10,10),
-                Name = "Netanel",
-                Report_Adress = "report_Adress",
-                Boom_count = 0,
-                ImagePath = "imagePath",
-                lat = 32.2323,
-                log = 23.345324
-                  }
-        };
-            Drop d = new Drop
-            {
-                Id = 3,
-                Drop_Id = 344981147,
-                Drop_Adress = "drop_Adress",
-                Drop_time = new DateTime(2010, 10, 10),
-                Reports_list = r,
-                Real_lat = 2.3333,
-                Real_log = 4.5654,
-                Estimeated_lat = 2.3333,
-                Estimeated_log = 4.5654,
+            //this.DataContext = new Entitys();
+            //{
+            //          new Report
+            //          {
+            //            Id = 10,
+            //            Report_Id=23,
+            //            Time = new DateTime(2000,10,10),
+            //            Name = "Moshe",
+            //            Report_Adress = "report_Adress",
+            //            Boom_count = 0,
+            //            ImagePath = "imagePath",
+            //            lat = 32.2323,
+            //            log = 23.345324
+            //          },
+            //          new Report {
+            //        Id = 11,
+            //        Report_Id= 123,
+            //        Time = new DateTime(2019,10,10),
+            //        Name = "Netanel",
+            //        Report_Adress = "report_Adress",
+            //        Boom_count = 0,
+            //        ImagePath = "imagePath",
+            //        lat = 32.2323,
+            //        log = 23.345324
+            //          }
+            //};
+            //Drop d = new Drop
+            //{
+            //    Id = 3,
+            //    Drop_Id = 344981147,
+            //    Drop_Adress = "drop_Adress",
+            //    Drop_time = new DateTime(2010, 10, 10),
+            //    Reports_list = r,
+            //    Real_lat = 2.3333,
+            //    Real_log = 4.5654,
+            //    Estimeated_lat = 2.3333,
+            //    Estimeated_log = 4.5654,
 
-            };
+            //};
             BL_imp bl = new BL_imp();
+            //bool removed=bl.RemoveAllDrops();
+            //2173
+            int idd = 344981000;
+            bool flag = true;
+            List<Report> r = new List<Report>();
+            //for (int i = 1000; i < 3000; i++)
+            //{
+
+            //    flag = bl.RemoveDrop(i);
+
+            //    //flag = true;
+
+            //    //while (flag)
+            //    //{
+
+            //    //    idd++;
+
+
+            //    //}
+            //}
+
             Drop dNati = new Drop
             {
                 Id = 207544131,
@@ -84,31 +104,59 @@ namespace wpf_MVVM_EntityFramework
                 Estimeated_log = 34.741990,
 
             };
-            bl.AddDrop(dNati);
-
-            for (int i = 0; i < 100; i++)
+            //bl.AddDrop(dNati);
+            bool good=bl.RemoveDrop(2173);
+            List<Drop> allDrops=bl.getDropsList();
+            //////////this resets the table but it wont work if the table has more then 1000 rows
+            int num = allDrops.Count();
+            for (int i = 0; i < num; i++)
             {
-                Random random = new Random();
-
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                string random_Drop_Adress = new string(Enumerable.Repeat(chars, 8)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-
-                bl.AddDrop(d);
-                d.Drop_Adress = random_Drop_Adress;
-                d.Drop_Id++;
+                bl.RemoveDrop(allDrops[0].Drop_Id);
+                allDrops = bl.getDropsList();
             }
+           // bl.AddDrop(dNati);
 
-            bool flag = true;
+            allDrops = bl.getDropsList();
+            int aa = 0;
+            //    Drop dNati = new Drop
+            //    {
+            //        Id = 207544131,
+            //        Drop_Id = 207544131,
+            //        Drop_Adress = "ישראל יבנה הזמיר 4",
+            //        Drop_time = new DateTime(2010, 10, 10),
 
-            while (flag)
-            {
+            //        Reports_list = r,
+            //        Real_lat = 0,
+            //        Real_log = 0,
+            //        Estimeated_lat = 31.874153,
+            //        Estimeated_log = 34.741990,
 
-                flag = bl.RemoveDrop(d.Drop_Id);
-                d.Drop_Id++;
+            //    };
+            //    bl.AddDrop(dNati);
+
+            //    for (int i = 0; i < 100; i++)
+            //    {
+            //        Random random = new Random();
+
+            //        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            //        string random_Drop_Adress = new string(Enumerable.Repeat(chars, 8)
+            //        .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            //        bl.AddDrop(d);
+            //        d.Drop_Adress = random_Drop_Adress;
+            //        d.Drop_Id++;
+            //    }
+
+            //    bool flag = true;
+
+            //while (flag)
+            //{
+
+            //    flag = bl.RemoveDrop(d.Drop_Id);
+            //    d.Drop_Id++;
 
 
-            }
+            //}
 
             #endregion
             InitializeComponent();
@@ -124,11 +172,11 @@ namespace wpf_MVVM_EntityFramework
             //pushpin.Background = new SolidColorBrush(Colors.Blue);
             //pushpin.Location = location;
             //pushpinLayer.AddChild(pushpin, location);
-            int x = 0;
+        
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Main.Content = new UserControls.AnalistPanel();
+            Main.Content = new UserControls.syncMap();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

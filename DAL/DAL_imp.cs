@@ -49,14 +49,14 @@ namespace DAL
             {
                 using (var db = new Entitys())
                 {
-                   //var dropToRemove = (from d in db.Drops where d.Id == id select d).First();
-                  //  var dropToRemove = (   from d in db.Drops where d.Drop_Id == id select d).FirstOrDefault();
-                  // Load one blogs and its related posts
-                  // var dropToRemove = db.Drops.Single(d => d.Drop_Id == id);
+                    //var dropToRemove = (from d in db.Drops where d.Id == id select d).First();
+                    // Load one blogs and its related posts
+                    // var dropToRemove = db.Drops.Single(d => d.Drop_Id == id);
                     var dropToRemove = db.Drops
                                        .Where(d => d.Drop_Id == id)
                                        .Include(r => r.Reports_list)
                                        .FirstOrDefault();
+                    // var dropToRemove = (   from d in db.Drops where d.Id == id select d).FirstOrDefault();
 
                     db.Drops.Remove(dropToRemove);
                     db.SaveChanges();
@@ -111,9 +111,31 @@ namespace DAL
                 return dropToReturn;
             }
         }        // done
-        public IEnumerable<Drop> getDropList(Func<Drop, bool> predicate = null)
+        public List<Drop> getDropList()
         {
-            throw new NotImplementedException();
+            using (var db = new  Entitys())
+            {
+                var drops = (from d in db.Drops  select d);
+                return drops.ToList<Drop>();
+            }
+        }
+        public bool RemoveAllDrops()
+        {
+            try
+            {
+                using (var db = new Entitys())
+                {
+                   
+                    var dropsToRemove = (from a in db.Drops select a);
+                    db.Drops.RemoveRange(dropsToRemove);
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         #endregion
 

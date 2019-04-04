@@ -19,10 +19,12 @@ namespace DAL
         bool UpdateDrop(Drop drop);
 
         IEnumerable<Report> getReportList(Func<Report, bool> predicate = null);
-        IEnumerable<Drop> getDropList(Func<Drop, bool> predicate = null);
+        List<Drop> getDropList();
 
         Drop GetDrop(int id);
         Report GetReport(int id);
+
+        bool RemoveAllDrops();
 
     }
 }

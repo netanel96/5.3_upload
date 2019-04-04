@@ -30,7 +30,7 @@ namespace BL
         }
         public Report GetReportById(int id)
         {
-            throw new NotImplementedException();
+            return dal.GetReport(id);
         }
         #endregion
 
@@ -398,11 +398,74 @@ namespace BL
                 Console.WriteLine("===================");
             } // k
         }
-     // Program
-    #endregion
+        // Program
+        #endregion
 
 
-    #endregion
+        #endregion
+        #region helpFunctions
+        public bool RemoveAllDrops()
+        {
+            return dal.RemoveAllDrops();
+        }
 
-}
+        //return list of all the drops from DataSource  vvdonevv
+       public List<Drop> getDropsList()
+        {
+            return dal.getDropList();
+        }
+
+        //return list of all the AccurateDrops from DataSource
+        public List<Drop> getAccurateDropList()
+        {
+            ////////////////////////////
+            ////////////////////////////code for altering the drop table.i can run it once and it should be enough.
+            ////////////////////////////
+            //using (DbConnection connection = new SqlConnection("Your connection string"))
+            //{
+            //    connection.Open();
+            //    using (DbCommand command = new SqlCommand("alter table [Product] add [ProductId] int default 0 NOT NULL"))
+            //    {
+            //        command.Connection = connection;
+            //        command.ExecuteNonQuery();
+            //    }
+            //}
+            ///////////////
+            ////
+            /////
+            /////
+            List<Drop> A = new List<Drop>();
+            return  A;
+        }
+
+        //taking list of drops and return a drop with estimate drop
+       public Drop CalculateEstimateDrop(List<Drop> drop_list)
+        {
+            return new Drop();
+        }
+
+        //return the distance from the acuurateDrop to the estimate drop 
+       public float EvaluateDistance(Drop d1, Drop d2)
+        {
+             float x=2;
+            return x;
+        }
+
+        //get address and return location (lat and long) return null if not success
+      public double[] getLatAndLong(string adress)
+        {
+            double[] latLong = new double[2];
+            return latLong;
+        }
+
+        //return the picture of the given drop
+       public String getPath(Drop id)
+        {
+            Drop drop = GetDropById(id.Drop_Id);
+            String Path = "";
+            return Path;
+        }
+
+        #endregion
+    }
 }

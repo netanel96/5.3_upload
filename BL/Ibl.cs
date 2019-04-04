@@ -22,6 +22,31 @@ namespace BL
        void GetCoordinate(string address);//צריך לממש ולהחזיר LAT LOG
        void GetCoordinateFromExif(string imagePath);//צריך לממש ולהחזיר LAT LOG
 
+        //more functions
+        #region helpFunctions
+        bool RemoveAllDrops();
+
+        //return list of all the drops from DataSource
+        List<Drop> getDropsList();
+
+        //return list of all the AccurateDrops from DataSource
+       List<Drop> getAccurateDropList();
+
+        //taking list of drops and return a drop with estimate drop
+         Drop CalculateEstimateDrop(List<Drop> drop_list);
+
+        //return the distance from the acuurateDrop to the estimate drop 
+        float EvaluateDistance(Drop d1, Drop d2);
+
+        //get address and return location (lat and long) return null if not success
+        double [] getLatAndLong(string adress);
+
+        //return the picture of the given drop
+        String getPath(Drop id);
+
+        #endregion
+
+
     }
 
 }
