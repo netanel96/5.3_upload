@@ -120,7 +120,7 @@ namespace wpf_MVVM_EntityFramework
             int aa = 0;
             //    Drop dNati = new Drop
             //    {
-            //        Id = 207544131,
+            //Id = 207544131,
             //        Drop_Id = 207544131,
             //        Drop_Adress = "ישראל יבנה הזמיר 4",
             //        Drop_time = new DateTime(2010, 10, 10),

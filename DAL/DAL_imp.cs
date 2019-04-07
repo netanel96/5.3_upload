@@ -119,24 +119,24 @@ namespace DAL
                 return drops.ToList<Drop>();
             }
         }
-        public bool RemoveAllDrops()
-        {
-            try
-            {
-                using (var db = new Entitys())
-                {
+        //public bool RemoveAllDrops()
+        //{
+        //    try
+        //    {
+        //        using (var db = new Entitys())
+        //        {
                    
-                    var dropsToRemove = (from a in db.Drops select a);
-                    db.Drops.RemoveRange(dropsToRemove);
-                    db.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //            var dropsToRemove = (from a in db.Drops select a);
+        //            db.Drops.RemoveRange(dropsToRemove);
+        //            db.SaveChanges();
+        //        }
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
         #endregion
 
         #region REPORT

@@ -24,7 +24,7 @@ namespace DAL
         Drop GetDrop(int id);
         Report GetReport(int id);
 
-        bool RemoveAllDrops();
+        //bool RemoveAllDrops();
 
     }
 }

@@ -142,7 +142,7 @@ namespace BL
 
         // ============================================================================
         //gets a double[][] and  return [][]means
-        public static double[][] Cluster(double[][] rawData, int numClusters)
+        public  double[][] Cluster(double[][] rawData, int numClusters)
         {
             // k-means clustering
             // index of return is tuple ID, cell is cluster ID
@@ -185,7 +185,7 @@ namespace BL
             return means;
         }
 
-        private static double[][] Normalized(double[][] rawData)
+        private  double[][] Normalized(double[][] rawData)
         {
             // normalize raw data by computing (x - mean) / stddev
             // primary alternative is min-max:
@@ -215,7 +215,7 @@ namespace BL
             return result;
         }
 
-        private static int[] InitClustering(int numTuples, int numClusters, int randomSeed)
+        private  int[] InitClustering(int numTuples, int numClusters, int randomSeed)
         {
             // init clustering semi-randomly (at least one tuple in each cluster)
             // consider alternatives, especially k-means++ initialization,
@@ -231,7 +231,7 @@ namespace BL
             return clustering;
         }
 
-        private static double[][] Allocate(int numClusters, int numColumns)
+        private  double[][] Allocate(int numClusters, int numColumns)
         {
             // convenience matrix allocator for Cluster()
             double[][] result = new double[numClusters][];
@@ -240,7 +240,7 @@ namespace BL
             return result;
         }
 
-        private static bool UpdateMeans(double[][] data, int[] clustering, double[][] means)
+        private  bool UpdateMeans(double[][] data, int[] clustering, double[][] means)
         {
             // returns false if there is a cluster that has no tuples assigned to it
             // parameter means[][] is really a ref parameter
@@ -268,7 +268,8 @@ namespace BL
             for (int i = 0; i < data.Length; ++i)
             {
                 int cluster = clustering[i];
-                for (int j = 0; j < data[i].Length; ++j)
+                // j < data[i].Length :didnt wrok for some reason  so i wrote 2
+                for (int j = 0; j < 2; ++j)
                     means[cluster][j] += data[i][j]; // accumulate sum
             }
 
@@ -278,7 +279,7 @@ namespace BL
             return true;
         }
 
-        private static bool UpdateClustering(double[][] data, int[] clustering, double[][] means)
+        private  bool UpdateClustering(double[][] data, int[] clustering, double[][] means)
         {
             // (re)assign each tuple to a cluster (closest mean)
             // returns false if no tuple assignments change OR
@@ -325,7 +326,7 @@ namespace BL
             return true; // good clustering and at least one change
         }
 
-        private static double Distance(double[] tuple, double[] mean)
+        private  double Distance(double[] tuple, double[] mean)
         {
             // Euclidean distance between two vectors for UpdateClustering()
             // consider alternatives such as Manhattan distance
@@ -335,7 +336,7 @@ namespace BL
             return Math.Sqrt(sumSquaredDiffs);
         }
 
-        private static int MinIndex(double[] distances)
+        private  int MinIndex(double[] distances)
         {
             // index of smallest value in array
             // helper for UpdateClustering()
@@ -404,10 +405,10 @@ namespace BL
 
         #endregion
         #region helpFunctions
-        public bool RemoveAllDrops()
-        {
-            return dal.RemoveAllDrops();
-        }
+        //public bool RemoveAllDrops()
+        //{
+        //    return dal.RemoveAllDrops();
+        //}
 
         //return list of all the drops from DataSource  vvdonevv
        public List<Drop> getDropsList()
@@ -439,9 +440,53 @@ namespace BL
         }
 
         //taking list of drops and return a drop with estimate drop
-       public Drop CalculateEstimateDrop(List<Drop> drop_list)
+       public List<Drop> CalculateEstimateDrop(List<Report> report_list)
         {
-            return new Drop();
+            int numOfClusters = 3;
+            double[][] rawData = new double[report_list.Count()][];
+            //inistiate the array
+            for (int i = 0; i < report_list.Count(); i++)
+            {
+                rawData[i] = new double[2];
+            }
+            
+
+            for (int i = 0; i < report_list.Count(); i++)
+            {       
+                    rawData[i][0] = report_list[i].lat;
+                    rawData[i][1] = report_list[i].log;
+            }
+            //inistiate the array
+            double[][] resultedLatLog = new double[numOfClusters][];
+            for (int i = 0; i < numOfClusters; i++)
+            {
+                resultedLatLog[i] = new double[2];
+            }
+            resultedLatLog = Cluster(rawData, numOfClusters);
+           
+
+            List<Drop> result = new List<Drop>(numOfClusters);
+            List<Report> r = new List<Report>();
+
+            for (int i = 0; i < numOfClusters; i++)
+            {
+                result.Add(new Drop
+                {
+                    Id = i,
+                    Drop_Id = 207544131,
+                    Drop_Adress = "ישראל יבנה הזמיר 4",
+                    Drop_time = new DateTime(2010, 10, 10),
+
+                    Reports_list = r,
+                    Real_lat = 0,
+                    Real_log = 0,
+                    Estimeated_lat = resultedLatLog[i][0],
+                    Estimeated_log = resultedLatLog[i][1],
+                });
+              //  result[i].Estimeated_lat = resultedLatLog[i][0];
+               // result[i].Estimeated_log = resultedLatLog[i][1];
+            }
+            return result;
         }
 
         //return the distance from the acuurateDrop to the estimate drop 

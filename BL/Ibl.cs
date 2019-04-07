@@ -24,7 +24,7 @@ namespace BL
 
         //more functions
         #region helpFunctions
-        bool RemoveAllDrops();
+        //bool RemoveAllDrops();
 
         //return list of all the drops from DataSource
         List<Drop> getDropsList();
@@ -33,7 +33,7 @@ namespace BL
        List<Drop> getAccurateDropList();
 
         //taking list of drops and return a drop with estimate drop
-         Drop CalculateEstimateDrop(List<Drop> drop_list);
+         List<Drop> CalculateEstimateDrop(List<Report> report_list);
 
         //return the distance from the acuurateDrop to the estimate drop 
         float EvaluateDistance(Drop d1, Drop d2);

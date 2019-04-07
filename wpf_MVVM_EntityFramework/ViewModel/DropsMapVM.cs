@@ -65,18 +65,41 @@ namespace wpf_MVVM_EntityFramework.ViewModel
         };
             //////
 
-            MainModel.BL.AddReport(reports[0]);
-            MainModel.BL.AddReport(reports[1]);
+           // MainModel.BL.AddReport(reports[0]);
+           // MainModel.BL.AddReport(reports[1]);
 
             List<Report> reportsFromDB = new List<Report>();
-            reportsFromDB.Add(MainModel.BL.GetReportById(23));
-            reportsFromDB.Add(MainModel.BL.GetReportById(24));
-            for (int i = 0; i < reportsFromDB.Count; i++)
+            //reportsFromDB.Add(MainModel.BL.GetReportById(23));
+            //reportsFromDB.Add(MainModel.BL.GetReportById(24));
+            //list of real reports in israel in yellow points
+            List<Report> Report_List = new List<Report>()
             {
-                MapProps.Add(new MapPropsModel() { Name = "USA ", Latitude = reportsFromDB[i].lat.ToString(), Longitude = reportsFromDB[i].log.ToString(), Color = "Gray" });
+          new Report{lat=32.184448,log= 34.870766 },
+          new Report{lat=31.705791,log= 35.200657},
+          new Report{lat=31.801447,log= 34.643497},
+          new Report{lat=32.699635,log= 35.303547},
+          new Report{lat=32.017136,log= 34.745441},
+          new Report{lat=32.109333,log= 34.855499},
+          new Report{lat=32.794044,log= 34.989571},
+          new Report{lat=32.919945,log= 35.290146},
+          new Report{lat=32.166313,log= 34.843311},
+          new Report{lat=31.894756,log= 34.809322},
+          new Report{lat=31.771959,log= 35.217018}
+        };
+            for (int i = 0; i < Report_List.Count; i++)
+            {
+                MapProps.Add(new MapPropsModel() { Name = "USA ", Latitude = Report_List[i].lat.ToString(), Longitude = Report_List[i].log.ToString(), Color = "Yellow" });
             }
-            //d
-            Debug.WriteLine(MainModel.BL.GetReportById(24).Report_Adress);
+            //CalculateEstimateDrop in red points
+            //num of clusters is 3
+            List<Drop> EstimatedDrops=MainModel.BL.CalculateEstimateDrop(Report_List);
+            for (int i = 0; i < EstimatedDrops.Count; i++)
+            {
+                MapProps.Add(new MapPropsModel() { Name = "USA ", Latitude = EstimatedDrops[i].Estimeated_lat.ToString(), Longitude = EstimatedDrops[i].Estimeated_log.ToString(), Color = "Red" });
+            }
+            //d for dubg i used:  Debug.WriteLine(MainModel.BL.GetReportById(24).Report_Adress);
+
+            Debug.WriteLine("Hello");
         }
         public void ShowDropsOnMap()
         {
