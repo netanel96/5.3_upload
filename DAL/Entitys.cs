@@ -25,5 +25,13 @@ namespace DAL
 
         public DbSet<Drop> Drops { get; set; }
         public DbSet<Report> Reports { get; set; }
+        //to add column after the DB have been created (in code first i guess):
+        //Enable-Migrations
+        //then:
+        //add the field you want to the class in your BE .in this project i added ImagePath(string type) to the Drop class.
+        //Add-Migration anyname
+        //then:
+        //Update-Database
+        //thats it!!
     }
 }

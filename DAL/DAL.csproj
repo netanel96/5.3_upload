@@ -75,6 +75,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entitys.cs" />
+    <Compile Include="Migrations\201901092037299_InitialCreate.cs" />
+    <Compile Include="Migrations\201901092037299_InitialCreate.Designer.cs">
+      <DependentUpon>201901092037299_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904221800158_addImagePath.cs" />
+    <Compile Include="Migrations\201904221800158_addImagePath.Designer.cs">
+      <DependentUpon>201904221800158_addImagePath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +97,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201901092037299_InitialCreate.resx">
+      <DependentUpon>201901092037299_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904221800158_addImagePath.resx">
+      <DependentUpon>201904221800158_addImagePath.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

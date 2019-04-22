@@ -4,9 +4,8 @@ using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using static BL.functions.ApiAdressToCoordinate;
+using System.Device.Location;
 namespace BL
 {
     public class BL_imp : Ibl //check working
@@ -67,70 +66,70 @@ namespace BL
         {
             var img = ExifImageTo_Lat_Log.GetLatLongFromImage(imagePath);
         }
-        #region 
-        public double[][] UseKmeans(List<Report> reports)
-        {
-            //gets list of reports and create drops and returns double[][] means 
-            //which is lat log of the means
+        //#region 
+        //public double[][] UseKmeans(List<Report> reports)
+        //{
+        //    //gets list of reports and create drops and returns double[][] means 
+        //    //which is lat log of the means
 
-            //
-            // maybe we wiil add a function that set a list of report for each drop 
-            // according to the output of kmeans then we will be able to show it
-            //
+        //    //
+        //    // maybe we wiil add a function that set a list of report for each drop 
+        //    // according to the output of kmeans then we will be able to show it
+        //    //
 
-            //////////NOT DONE!!!!!!///////////////////////////////////////////////
-            //getting number of cluster according to number of 10 minutes
-            //and list of first times for each group 
-            int numClusters = 3;//3 for testing 
-            List<DateTime> timeOfDrops = new List<DateTime>();
-            int hour = 0;
+        //    //////////NOT DONE!!!!!!///////////////////////////////////////////////
+        //    //getting number of cluster according to number of 10 minutes
+        //    //and list of first times for each group 
+        //    int numClusters = 3;//3 for testing 
+        //    List<DateTime> timeOfDrops = new List<DateTime>();
+        //    int hour = 0;
             
-            for (int i = 0; i < reports.Count; i++)
-            {
-                if (reports[i].Time.Minute == 10)
-                {
+        //    for (int i = 0; i < reports.Count; i++)
+        //    {
+        //        if (reports[i].Time.Minute == 10)
+        //        {
 
-                }
-            }        
-            //////////////////////////////////////////////////////////////////
+        //        }
+        //    }        
+        //    //////////////////////////////////////////////////////////////////
             
-            //takeing lat log out of the reports which will be our raw_data.
-            double[][] rawData = new double[reports.Count][];
-            for (int i = 0; i < reports.Count; i++)
-            {
-                rawData[i] = new double[] { reports[i].lat, reports[i].log };
-            }
-            //then sending them to k_means function and get double[][] of means.
-            double[][] clustering = Cluster(rawData, numClusters); // this is it
+        //    //takeing lat log out of the reports which will be our raw_data.
+        //    double[][] rawData = new double[reports.Count][];
+        //    for (int i = 0; i < reports.Count; i++)
+        //    {
+        //        rawData[i] = new double[] { reports[i].lat, reports[i].log };
+        //    }
+        //    //then sending them to k_means function and get double[][] of means.
+        //    double[][] clustering = Cluster(rawData, numClusters); // this is it
 
-            /////////////////NOT DONE!!!!!!!!////////////////////////////
-            //get address from lat log
-            List<string> adresses = new List<string>();
+        //    /////////////////NOT DONE!!!!!!!!////////////////////////////
+        //    //get address from lat log
+        //    List<string> adresses = new List<string>();
 
-            ////////////////////////////////////////////////////////
-            //create drop objects and update them with estimated lat log and adress.
-            for (int i = 0; i < numClusters; i++)
-            {
-                Drop d=new Drop 
-                {
-                    Id = i,
-                    Drop_Id =i ,
-                    Drop_Adress = adresses[i],
-                    Drop_time = timeOfDrops[i],
-                    Reports_list = null,
-                    Real_lat = 0,
-                    Real_log = 0,
-                    Estimeated_lat = clustering[i][0],
-                    Estimeated_log = clustering[i][1],
+        //    ////////////////////////////////////////////////////////
+        //    //create drop objects and update them with estimated lat log and adress.
+        //    for (int i = 0; i < numClusters; i++)
+        //    {
+        //        Drop d=new Drop 
+        //        {
+        //            Id = i,
+        //            Drop_Id =i ,
+        //            Drop_Adress = adresses[i],
+        //            Drop_time = timeOfDrops[i],
+        //            Reports_list = null,
+        //            Real_lat = 0,
+        //            Real_log = 0,
+        //            Estimeated_lat = clustering[i][0],
+        //            Estimeated_log = clustering[i][1],
 
-                };
-                dal.AddDrop(d);
-            }
-            return clustering;
+        //        };
+        //        dal.AddDrop(d);
+        //    }
+        //    return clustering;
 
 
-        }
-        #endregion
+        //}
+        //#endregion
 
 
         #region k_means
@@ -442,6 +441,7 @@ namespace BL
         //taking list of drops and return a drop with estimate drop
        public List<Drop> CalculateEstimateDrop(List<Report> report_list)
         {
+
             int numOfClusters = 3;
             double[][] rawData = new double[report_list.Count()][];
             //inistiate the array
@@ -492,8 +492,10 @@ namespace BL
         //return the distance from the acuurateDrop to the estimate drop 
        public float EvaluateDistance(Drop d1, Drop d2)
         {
-             float x=2;
-            return x;
+            var sCoord = new System.Device.Location.GeoCoordinate(d1.Estimeated_lat, d1.Estimeated_log);
+            var eCoord = new System.Device.Location.GeoCoordinate(d2.Estimeated_lat, d2.Estimeated_log);
+            
+            return (float)sCoord.GetDistanceTo(eCoord);
         }
 
         //get address and return location (lat and long) return null if not success
@@ -504,11 +506,10 @@ namespace BL
         }
 
         //return the picture of the given drop
-       public String getPath(Drop id)
+       public string getPath(Drop id)
         {
             Drop drop = GetDropById(id.Drop_Id);
-            String Path = "";
-            return Path;
+            return drop.ImagePath;
         }
 
         #endregion

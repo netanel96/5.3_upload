@@ -1,7 +1,9 @@
 ﻿using BE;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,6 +90,19 @@ namespace DAL
         }  // done
         public Drop GetDrop(int id)
         {
+            ////////////////////////////
+            /////////////////////////////
+            //using (DbConnection connection = new SqlConnection(@"data source=LAPTOP-438HUAJF\SQLEXPRESS; initial catalog=wpf_MVVM_EntityFramework;integrated security=SSPI"))
+            //{
+            //    connection.Open();
+            //    using (DbCommand command = new SqlCommand("alter table [Drops] DROP COLUMN  [ImagePath]  "))
+            //    {
+            //        command.Connection = connection;
+            //        command.ExecuteNonQuery();
+            //    }
+            //}
+            ///////////////////////////
+            ///////////////////////////
             //using (var db =  new Entitys())
             //{
             //    var drop = (from d in db.Drops where d.Drop_Id == id select d).First();

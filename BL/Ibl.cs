@@ -39,10 +39,11 @@ namespace BL
         float EvaluateDistance(Drop d1, Drop d2);
 
         //get address and return location (lat and long) return null if not success
-        double [] getLatAndLong(string adress);
+        //יש כבר פונקציה כזו: GetCoordinate 
+        double[] getLatAndLong(string adress);
 
         //return the picture of the given drop
-        String getPath(Drop id);
+        string getPath(Drop id);
 
         #endregion
 

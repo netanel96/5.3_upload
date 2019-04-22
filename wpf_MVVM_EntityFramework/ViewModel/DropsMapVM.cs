@@ -65,7 +65,6 @@ namespace wpf_MVVM_EntityFramework.ViewModel
         };
             //////
 
-           // MainModel.BL.AddReport(reports[0]);
            // MainModel.BL.AddReport(reports[1]);
 
             List<Report> reportsFromDB = new List<Report>();
@@ -93,12 +92,41 @@ namespace wpf_MVVM_EntityFramework.ViewModel
             //CalculateEstimateDrop in red points
             //num of clusters is 3
             List<Drop> EstimatedDrops=MainModel.BL.CalculateEstimateDrop(Report_List);
+
+            ////////////////FORTESTING/////////////////
+            MainModel.BL.AddDrop(EstimatedDrops[0]);
+            MainModel.BL.GetDropById(EstimatedDrops[0].Drop_Id);
+            Drop d1 = MainModel.BL.GetDropById(EstimatedDrops[0].Drop_Id);
+            Drop d2 = EstimatedDrops[1];
+
+            //Drop d1 = new Drop
+            //{
+            //    Id = i,
+            //    Drop_Id = 207544131,
+            //    Drop_Adress = "ישראל יבנה הזמיר 4",
+            //    Drop_time = new DateTime(2010, 10, 10),
+
+            //    Reports_list = r,
+            //    Real_lat = 0,
+            //    Real_log = 0,
+            //    Estimeated_lat = resultedLatLog[i][0],
+            //    Estimeated_log = resultedLatLog[i][1],
+            //};     
+            ////d1 lat:32.804541333333333  log:35.194421333333331
+            ///d2 lat:31.738875 log 35.2088375
+            ///distance: 118606.742 
+            ///
+            float distance =MainModel.BL.EvaluateDistance(d1,d2);
+            //  int yy = 0;
+            // MainModel.BL.RemoveDrop(EstimatedDrops[0].Drop_Id);
+            ////////////////FORTESTING/////////////////
+
             for (int i = 0; i < EstimatedDrops.Count; i++)
             {
                 MapProps.Add(new MapPropsModel() { Name = "USA ", Latitude = EstimatedDrops[i].Estimeated_lat.ToString(), Longitude = EstimatedDrops[i].Estimeated_log.ToString(), Color = "Red" });
             }
             //d for dubg i used:  Debug.WriteLine(MainModel.BL.GetReportById(24).Report_Adress);
-
+            
             Debug.WriteLine("Hello");
         }
         public void ShowDropsOnMap()

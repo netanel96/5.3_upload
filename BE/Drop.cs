@@ -27,10 +27,11 @@ namespace BE
         public DateTime Drop_time { get; set; }
         public List<Report> Reports_list { get; set; }
         public double Real_lat { get; set; }
+
         public double Real_log { get; set; }
         public double Estimeated_lat { get; set; }
         public double Estimeated_log { get; set; }
-
+        public string ImagePath{get; set;}
 
         // private  string GPS_Coordinates { get; set; }
         //  private struct Lat_Long {public double Latitude;  public double Longitude;}  
